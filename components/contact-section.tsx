@@ -56,7 +56,7 @@ export function ContactSection() {
 
   const handleWhatsAppContact = () => {
     const message = "Hola, me interesa conocer más sobre sus servicios de transporte de carga."
-    const phoneNumber = "5551234567" // Replace with actual WhatsApp number
+    const phoneNumber = "+50767811718" // Replace with actual WhatsApp number
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
     window.open(url, "_blank")
   }
