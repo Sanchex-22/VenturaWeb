@@ -12,7 +12,6 @@ export function Header() {
     { name: "Inicio", href: "#inicio" },
     { name: "Quiénes Somos", href: "#quienes-somos" },
     { name: "Servicios", href: "#servicios" },
-    { name: "Clientes", href: "#clientes" },
     { name: "Contacto", href: "#contacto" },
   ]
     const handleScrollToContact = () => {
