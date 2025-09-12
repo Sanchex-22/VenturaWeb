@@ -1,7 +1,6 @@
 "use client"
 
 import { Truck, Facebook, Twitter, Linkedin, Instagram, MapPin, Phone, Mail, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 const footerLinks = {
   company: [
@@ -26,13 +25,6 @@ const socialLinks = [
 ]
 
 export function Footer() {
-  const handleQuoteRequest = () => {
-    const subject = "Solicitud de Cotización - TRANSPORTE VENTURA"
-    const body =
-      "Estimados,\n\nMe gustaría solicitar una cotización para sus servicios de transporte.\n\nPor favor proporcionen información sobre:\n- Tipo de carga:\n- Origen:\n- Destino:\n- Fecha estimada:\n- Observaciones adicionales:\n\nQuedo atento a su respuesta.\n\nSaludos cordiales."
-    const mailtoLink = `mailto:operaciones@transventura.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    window.open(mailtoLink, "_blank")
-  }
 
   return (
     <footer className="bg-card border-t border-border">
@@ -120,23 +112,6 @@ export function Footer() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="border-t border-border mt-12 pt-8">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4">Contáctenos</h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              ¿Necesita una cotización personalizada? Nuestro equipo está listo para brindarle la mejor solución
-              logística para su empresa.
-            </p>
-            <Button
-              onClick={handleQuoteRequest}
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3"
-            >
-              Solicitar Cotización
-            </Button>
           </div>
         </div>
 

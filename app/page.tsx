@@ -8,6 +8,7 @@ import { TeamSection } from "@/components/team-section"
 // import { ClientsSection } from "@/components/clients-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
+import { ClientsSection } from "@/components/clients-section"
 
 export default function HomePage() {
   return (
@@ -20,8 +21,8 @@ export default function HomePage() {
         <WhyChooseUsSection />
         <RoutesCoverageSection />
         <TeamSection />
-        {/* <ClientsSection /> */}
         <ContactSection />
+        <ClientsSection />
       </main>
       <Footer />
     </div>

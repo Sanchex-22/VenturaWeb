@@ -15,6 +15,15 @@ export function Header() {
     { name: "Clientes", href: "#clientes" },
     { name: "Contacto", href: "#contacto" },
   ]
+    const handleScrollToContact = () => {
+    const contactSection = document.getElementById('contacto');
+    // Se verifica si la sección existe y luego se hace el scroll
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.warn("La sección con id 'contacto' no fue encontrada.");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -47,7 +56,7 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-primary hover:bg-primary/90">Solicitar Cotización</Button>
+            <Button onClick={handleScrollToContact} className="bg-primary hover:bg-primary/90">Solicitar Cotización</Button>
           </div>
 
           {/* Mobile menu button */}

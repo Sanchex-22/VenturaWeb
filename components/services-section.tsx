@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Truck, Package, MapPin, ArrowRight, Warehouse, Shield } from "lucide-react"
@@ -30,6 +31,17 @@ const services = [
 ]
 
 export function ServicesSection() {
+  // Función corregida para manejar el scroll
+  const handleScrollToContact = () => {
+    const contactSection = document.getElementById('contacto');
+    // Se verifica si la sección existe y luego se hace el scroll
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.warn("La sección con id 'contacto' no fue encontrada.");
+    }
+  };
+
   return (
     <section id="servicios" className="py-20">
       <div className="container mx-auto px-4">
@@ -63,6 +75,7 @@ export function ServicesSection() {
                       variant="outline"
                       size="sm"
                       className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
+                      onClick={handleScrollToContact}
                     >
                       Más información
                     </Button>
@@ -91,7 +104,7 @@ export function ServicesSection() {
               </div>
             </div>
             <div className="text-center md:text-right">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button onClick={handleScrollToContact} size="lg" className="bg-primary hover:bg-primary/90">
                 Solicitar Cotización
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

@@ -13,12 +13,12 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Dirección",
-    content: "Av. Industrial 1234, Zona Logística\nCiudad, País CP 12345",
+    content: "Villa Las Acacias, Urbanización ANASA,\n Local #380, Ciudad de Panamá",
   },
   {
     icon: Phone,
     title: "Teléfono",
-    content: "+1 (555) 123-4567\n+1 (555) 987-6543",
+    content: "+507 6781-1718\n+507 6070-7231",
   },
   {
     icon: Mail,
@@ -28,7 +28,7 @@ const contactInfo = [
   {
     icon: Clock,
     title: "Horarios",
-    content: "Lun - Vie: 8:00 AM - 6:00 PM\nSáb: 8:00 AM - 2:00 PM",
+    content: "Lun – Vie: 8:00 AM – 5:00 PM\nSáb: 8:00 AM – 12:00 MD",
   },
 ]
 
@@ -222,7 +222,7 @@ export function ContactSection() {
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
                     <p className="text-muted-foreground">Mapa de Ubicación</p>
-                    <p className="text-sm text-muted-foreground">Av. Industrial 1234, Zona Logística</p>
+                    <p className="text-sm text-muted-foreground">Villa Las Acacias, Urbanización ANASA, Local #380, Ciudad de Panamá</p>
                   </div>
                 </div>
               </CardContent>
