@@ -72,7 +72,7 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-1 gap-12">
           {/* Contact Form */}
           <Card>
             <CardContent className="p-8">
@@ -166,68 +166,6 @@ export function ContactSection() {
             </CardContent>
           </Card>
 
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-6">Información de Contacto</h3>
-              <div className="grid gap-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="bg-primary/10 p-3 rounded-lg">
-                      <info.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-1">{info.title}</h4>
-                      <p className="text-muted-foreground whitespace-pre-line leading-relaxed">{info.content}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-xl font-bold mb-4">Síguenos en Redes Sociales</h4>
-              <div className="flex space-x-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-blue-500 text-blue-600 hover:bg-blue-50 bg-transparent"
-                  onClick={() => window.open("https://facebook.com/transporteventura", "_blank")}
-                >
-                  <Facebook className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-pink-500 text-pink-600 hover:bg-pink-50 bg-transparent"
-                  onClick={() => window.open("https://instagram.com/transporteventura", "_blank")}
-                >
-                  <Instagram className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-blue-700 text-blue-700 hover:bg-blue-50 bg-transparent"
-                  onClick={() => window.open("https://linkedin.com/company/transporteventura", "_blank")}
-                >
-                  <Linkedin className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Map Placeholder */}
-            <Card>
-              <CardContent className="p-0">
-                <div className="h-64 bg-muted rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-muted-foreground">Mapa de Ubicación</p>
-                    <p className="text-sm text-muted-foreground">Villa Las Acacias, Urbanización ANASA, Local #380, Ciudad de Panamá</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </div>
     </section>
