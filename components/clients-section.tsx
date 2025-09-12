@@ -118,24 +118,6 @@ export function ClientsSection() {
           </div>
         </div>
 
-        {/* Client Logos */}
-        <div>
-          <h3 className="text-2xl font-bold text-center mb-12">Empresas que Confían en Nosotros</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-            {clients.map((client, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300"
-              >
-                <img
-                  src={client.logo || "/placeholder.svg"}
-                  alt={client.name}
-                  className="max-h-12 w-auto opacity-60 hover:opacity-100 transition-opacity"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )

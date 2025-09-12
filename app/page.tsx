@@ -22,7 +22,6 @@ export default function HomePage() {
         <RoutesCoverageSection />
         <TeamSection />
         <ContactSection />
-        <ClientsSection />
       </main>
       <Footer />
     </div>
