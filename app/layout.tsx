@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="manifest" href="/site.webmanifest" />
         <MetaHeader/>
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
