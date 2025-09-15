@@ -85,32 +85,6 @@ export function ServicesSection() {
             </Card>
           ))}
         </div>
-
-        <div className="bg-white border border-gray-200 rounded-2xl p-8 md:p-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-balance text-black">
-                Equipos y Personal Especializado
-              </h3>
-              <div className="space-y-4 text-gray-600">
-                <div className="flex items-start space-x-3">
-                  <Shield className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                  <p>Equipos en óptimas condiciones, con mantenimiento actualizado y estándares de seguridad.</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Package className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                  <p>Personal experto en logística portuaria y manejo de documentación.</p>
-                </div>
-              </div>
-            </div>
-            <div className="text-center md:text-right">
-              <Button onClick={handleScrollToContact} size="lg" className="bg-primary hover:bg-primary/90">
-                Solicitar Cotización
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )

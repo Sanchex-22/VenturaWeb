@@ -29,18 +29,7 @@ export function RoutesCoverageSection() {
               <li>• Manzanillo</li>
               <li>• PSA</li>
               <li>• CCT</li>
-            </ul>
-          </div>
-
-          {/* Zonas Francas */}
-          <div className="bg-gray-50 rounded-lg p-6 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Building2 className="w-8 h-8 text-green-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Zonas Francas</h3>
-            <ul className="text-gray-600 space-y-2">
-              <li>• Colón</li>
-              <li>• Centros logísticos estratégicos</li>
+              <li>• Cristóbal</li>
             </ul>
           </div>
 

@@ -8,11 +8,6 @@ export function WhyChooseUsSection() {
       description: "Más de 30 años en el transporte de contenedores a nivel nacional.",
     },
     {
-      icon: Shield,
-      title: "Seguridad garantizada",
-      description: "Flota en óptimas condiciones y personal altamente capacitado.",
-    },
-    {
       icon: Clock,
       title: "Cumplimiento y puntualidad",
       description: "Respetamos los tiempos de entrega y las necesidades de cada cliente.",
