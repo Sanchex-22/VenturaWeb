@@ -2,15 +2,71 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { MessageCircle, Loader2 } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
+import { MessageCircle, Loader2, CheckCircle2, XCircle } from "lucide-react"
+
+// Ya no usaremos framer-motion, ni useToast
+// import { AnimatePresence, motion } from "framer-motion"
+// import { useToast } from "@/components/ui/use-toast" 
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || ""
+
+// --- Nuevo componente de Alerta de Mensaje (sin framer-motion) ---
+interface AlertMessageProps {
+  type: "success" | "error" | null;
+  message: string;
+  onClose: () => void; // Función para cerrar la alerta
+}
+
+const AlertMessage: React.FC<AlertMessageProps> = ({ type, message, onClose }) => {
+  if (!type || !message) return null;
+
+  const classes = {
+    success: "bg-green-100 border-green-400 text-green-700",
+    error: "bg-red-100 border-red-400 text-red-700",
+  };
+
+  const icons = {
+    success: <CheckCircle2 className="h-5 w-5" />,
+    error: <XCircle className="h-5 w-5" />, // Usamos XCircle para cerrar, pero puede ser una X simple también.
+  };
+
+  // Autocierre después de 5 segundos
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 5000); // 5 segundos
+    return () => clearTimeout(timer); // Limpiar el timer si el componente se desmonta o el tipo/mensaje cambian
+  }, [type, message, onClose]);
+
+  return (
+    <div
+      className={`p-4 rounded-md border flex items-center justify-between shadow-md mb-6 transition-opacity duration-300 ${classes[type]}`}
+      role="alert" // Para accesibilidad
+    >
+      <div className="flex items-center">
+        {icons[type]}
+        <p className="ml-3 text-sm font-medium">{message}</p>
+      </div>
+      <button
+        onClick={onClose}
+        className={`ml-auto -mx-1.5 -my-1.5 p-1.5 rounded-md inline-flex h-8 w-8 focus:ring-2 ${
+          type === "success" ? "hover:bg-green-200 focus:ring-green-400" : "hover:bg-red-200 focus:ring-red-400"
+        }`}
+        aria-label="Cerrar alerta"
+      >
+        {/* Usamos una X simple para el botón de cerrar la alerta */}
+        <XCircle className="h-5 w-5" /> 
+      </button>
+    </div>
+  );
+};
+// --- Fin del componente de Alerta de Mensaje ---
+
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -22,7 +78,10 @@ export function ContactSection() {
     website: "", // Honeypot field - should remain empty
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  
+  // Estados para el nuevo sistema de alerta
+  const [alertType, setAlertType] = useState<"success" | "error" | null>(null)
+  const [alertMessage, setAlertMessage] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,6 +92,8 @@ export function ContactSection() {
     }
 
     setIsSubmitting(true)
+    setAlertType(null); // Reset alert on new submission
+    setAlertMessage("");
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/contact`, {
@@ -53,10 +114,8 @@ export function ContactSection() {
       const data = await response.json()
 
       if (response.ok) {
-        toast({
-          title: "¡Mensaje enviado exitosamente!",
-          description: "Te estaremos contactando pronto. Gracias por tu interés.",
-        })
+        setAlertType("success");
+        setAlertMessage("¡Cotización enviada exitosamente! Te estaremos contactando pronto. Gracias por tu interés.");
         setFormData({
           name: "",
           email: "",
@@ -66,19 +125,13 @@ export function ContactSection() {
           website: "", // Reset honeypot
         })
       } else {
-        toast({
-          title: "Error al enviar",
-          description: data.message || "Hubo un problema al enviar tu solicitud. Intenta de nuevo.",
-          variant: "destructive",
-        })
+        setAlertType("error");
+        setAlertMessage(data.message || "Hubo un problema al enviar tu solicitud. Intenta de nuevo.");
       }
     } catch (error) {
       console.error("Error al enviar el formulario:", error)
-      toast({
-        title: "Error de conexión",
-        description: "No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet.",
-        variant: "destructive",
-      })
+      setAlertType("error");
+      setAlertMessage("No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet.");
     } finally {
       setIsSubmitting(false)
     }
@@ -98,6 +151,12 @@ export function ContactSection() {
     window.open(url, "_blank")
   }
 
+  // Función para cerrar la alerta manualmente
+  const handleCloseAlert = () => {
+    setAlertType(null);
+    setAlertMessage("");
+  };
+
   return (
     <section id="contacto" className="py-20">
       <div className="container mx-auto px-4">
@@ -113,6 +172,16 @@ export function ContactSection() {
           <Card>
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-6">Solicitar Cotización</h3>
+              
+              {/* Aquí mostramos el AlertMessage de forma condicional, sin AnimatePresence */}
+              {(alertType && alertMessage) && (
+                <AlertMessage 
+                  type={alertType} 
+                  message={alertMessage} 
+                  onClose={handleCloseAlert} 
+                />
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <input
                   type="text"

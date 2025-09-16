@@ -298,7 +298,10 @@ export async function POST(req: Request) {
 
     if (confirmationEmail.error) {
       console.error("Error al enviar correo de confirmación:", confirmationEmail.error)
-      // Don't fail the main request if confirmation email fails
+        return NextResponse.json(
+      { message: "Error al enviar el correo." },
+      { status: 500, headers: withCors(origin) },
+    )
     }
 
     console.log("Correo enviado con éxito (Resend ID):", data?.id)
