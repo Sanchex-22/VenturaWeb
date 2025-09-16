@@ -5,17 +5,13 @@ import { Resend } from "resend"
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Define los orígenes permitidos para CORS
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://survey-next-git-main-intermaritime.vercel.app",
-  "https://surveys.intermaritime.org",
-]
+const allowedOrigins = process.env.ORIGINS?.split(",").map(o => o.trim()) || []
 
 // Función auxiliar para gestionar los encabezados CORS
 function withCors(origin: string | null) {
   const isAllowed = origin && allowedOrigins.includes(origin)
   return {
-    "Access-Control-Allow-Origin": isAllowed ? origin : allowedOrigins[0],
+    "Access-Control-Allow-Origin": isAllowed ? origin : allowedOrigins[0] || "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization, X-CSRF-Token",
     "Access-Control-Allow-Credentials": "true",
