@@ -4,11 +4,10 @@ import { AboutSection } from "@/components/about-section"
 import { ServicesSection } from "@/components/services-section"
 import { WhyChooseUsSection } from "@/components/why-choose-us-section"
 import { RoutesCoverageSection } from "@/components/routes-coverage-section"
-import { TeamSection } from "@/components/team-section"
+// import { TeamSection } from "@/components/team-section"
 // import { ClientsSection } from "@/components/clients-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
-import { ClientsSection } from "@/components/clients-section"
 
 export default function HomePage() {
   return (
@@ -20,7 +19,7 @@ export default function HomePage() {
         <ServicesSection />
         <WhyChooseUsSection />
         <RoutesCoverageSection />
-        <TeamSection />
+        {/* <TeamSection /> */}
         <ContactSection />
       </main>
       <Footer />
