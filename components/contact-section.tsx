@@ -1,19 +1,19 @@
 // components/ContactSection.tsx - Enhanced with anti-spam and animations
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { MessageCircle, Loader2, CheckCircle2, XCircle } from "lucide-react"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { MessageCircle, Loader2, CheckCircle2, XCircle } from "lucide-react";
 
 // Ya no usaremos framer-motion, ni useToast
 // import { AnimatePresence, motion } from "framer-motion"
-// import { useToast } from "@/components/ui/use-toast" 
+// import { useToast } from "@/components/ui/use-toast"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || ""
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 // --- Nuevo componente de Alerta de Mensaje (sin framer-motion) ---
 interface AlertMessageProps {
@@ -22,7 +22,11 @@ interface AlertMessageProps {
   onClose: () => void; // Función para cerrar la alerta
 }
 
-const AlertMessage: React.FC<AlertMessageProps> = ({ type, message, onClose }) => {
+const AlertMessage: React.FC<AlertMessageProps> = ({
+  type,
+  message,
+  onClose,
+}) => {
   if (!type || !message) return null;
 
   const classes = {
@@ -55,18 +59,19 @@ const AlertMessage: React.FC<AlertMessageProps> = ({ type, message, onClose }) =
       <button
         onClick={onClose}
         className={`ml-auto -mx-1.5 -my-1.5 p-1.5 rounded-md inline-flex h-8 w-8 focus:ring-2 ${
-          type === "success" ? "hover:bg-green-200 focus:ring-green-400" : "hover:bg-red-200 focus:ring-red-400"
+          type === "success"
+            ? "hover:bg-green-200 focus:ring-green-400"
+            : "hover:bg-red-200 focus:ring-red-400"
         }`}
         aria-label="Cerrar alerta"
       >
         {/* Usamos una X simple para el botón de cerrar la alerta */}
-        <XCircle className="h-5 w-5" /> 
+        <XCircle className="h-5 w-5" />
       </button>
     </div>
   );
 };
 // --- Fin del componente de Alerta de Mensaje ---
-
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -76,22 +81,22 @@ export function ContactSection() {
     company: "",
     message: "",
     website: "", // Honeypot field - should remain empty
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Estados para el nuevo sistema de alerta
-  const [alertType, setAlertType] = useState<"success" | "error" | null>(null)
-  const [alertMessage, setAlertMessage] = useState("")
+  const [alertType, setAlertType] = useState<"success" | "error" | null>(null);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (formData.website) {
       // Silently reject bot submissions
-      return
+      return;
     }
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     setAlertType(null); // Reset alert on new submission
     setAlertMessage("");
 
@@ -109,13 +114,15 @@ export function ContactSection() {
           message: formData.message,
           // Don't send honeypot field to server
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
         setAlertType("success");
-        setAlertMessage("¡Cotización enviada exitosamente! Te estaremos contactando pronto. Gracias por tu interés.");
+        setAlertMessage(
+          "¡Cotización enviada exitosamente! Te estaremos contactando pronto. Gracias por tu interés."
+        );
         setFormData({
           name: "",
           email: "",
@@ -123,33 +130,40 @@ export function ContactSection() {
           company: "",
           message: "",
           website: "", // Reset honeypot
-        })
+        });
       } else {
         setAlertType("error");
-        setAlertMessage(data.message || "Hubo un problema al enviar tu solicitud. Intenta de nuevo.");
+        setAlertMessage(
+          data.message ||
+            "Hubo un problema al enviar tu solicitud. Intenta de nuevo."
+        );
       }
     } catch (error) {
-      console.error("Error al enviar el formulario:", error)
+      console.error("Error al enviar el formulario:", error);
       setAlertType("error");
-      setAlertMessage("No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet.");
+      setAlertMessage(
+        "No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet."
+      );
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
-  const handleWhatsAppContact = () => {
-    const message = "Hola, me interesa conocer más sobre sus servicios de transporte de carga."
-    const phoneNumber = "+50767811718" // Replace with actual WhatsApp number
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-    window.open(url, "_blank")
-  }
+  const message =
+    "Hola, me interesa conocer más sobre sus servicios de transporte de carga.";
+  const phoneNumber = "+50767811718"; // Replace with actual WhatsApp number
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
 
   // Función para cerrar la alerta manualmente
   const handleCloseAlert = () => {
@@ -161,10 +175,13 @@ export function ContactSection() {
     <section id="contacto" className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Contáctanos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+            Contáctanos
+          </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-            Estamos aquí para ayudarte. Contáctanos para una cotización personalizada o para resolver cualquier consulta
-            sobre nuestros servicios.
+            Estamos aquí para ayudarte. Contáctanos para una cotización
+            personalizada o para resolver cualquier consulta sobre nuestros
+            servicios.
           </p>
         </div>
 
@@ -172,13 +189,13 @@ export function ContactSection() {
           <Card>
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-6">Solicitar Cotización</h3>
-              
+
               {/* Aquí mostramos el AlertMessage de forma condicional, sin AnimatePresence */}
-              {(alertType && alertMessage) && (
-                <AlertMessage 
-                  type={alertType} 
-                  message={alertMessage} 
-                  onClose={handleCloseAlert} 
+              {alertType && alertMessage && (
+                <AlertMessage
+                  type={alertType}
+                  message={alertMessage}
+                  onClose={handleCloseAlert}
                 />
               )}
 
@@ -195,7 +212,10 @@ export function ContactSection() {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Nombre Completo *
                     </label>
                     <Input
@@ -209,7 +229,10 @@ export function ContactSection() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Email *
                     </label>
                     <Input
@@ -226,7 +249,10 @@ export function ContactSection() {
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Teléfono
                     </label>
                     <Input
@@ -239,7 +265,10 @@ export function ContactSection() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="company"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Empresa
                     </label>
                     <Input
@@ -253,7 +282,10 @@ export function ContactSection() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Mensaje *
                   </label>
                   <Textarea
@@ -284,22 +316,22 @@ export function ContactSection() {
                 </Button>
               </form>
 
-              <div className="mt-6 pt-6 border-t border-border">
-                <Button
-                  onClick={handleWhatsAppContact}
-                  variant="outline"
-                  size="lg"
-                  className="w-full border-green-500 text-green-600 hover:bg-green-50 bg-transparent transition-colors duration-200"
-                  disabled={isSubmitting}
-                >
-                  <MessageCircle className="h-5 w-5 mr-2" />
-                  Contactar por WhatsApp
-                </Button>
+              <div className="w-auto mt-6 pt-6 border-t border-border flex justify-center">
+                <div className="w-full flex justify-center border-green-500 border rounded py-2">
+                  <a
+                    href={url}
+                    target="_blank"
+                    className="w-full flex justify-center border-green-500 text-green-600 bg-transparent transition-colors duration-200"
+                  >
+                    <MessageCircle className="h-5 w-5 mr-2" />
+                    <span>Contactar por WhatsApp</span>
+                  </a>
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
     </section>
-  )
+  );
 }
