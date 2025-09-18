@@ -63,20 +63,20 @@ export function AboutSection() {
               <img
                 src="/truck-with-container-highway.jpeg"
                 alt="Camión TRANSPORTE VENTURA en carretera"
-                className="rounded-lg shadow-md w-full h-24 object-cover"
+                className="rounded-lg shadow-md w-full h-36 object-cover"
               />
               <img
-                src="/trucks-industrial-yard.jpeg"
+                src="/trucks-industrial-yard.jpg"
                 alt="Flota en patio industrial"
-                className="rounded-lg shadow-md w-full h-24 object-cover"
+                className="rounded-lg shadow-md w-full h-36 object-cover"
               />
             </div>
           </div>
-          <div className="relative">
+          <div className="relative w-full h-full">
             <img
               src="/three-trucks-evening-lineup.jpeg"
               alt="Flota de TRANSPORTE VENTURA"
-              className="rounded-lg shadow-lg w-full"
+              className="rounded-lg shadow-lg w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
           </div>

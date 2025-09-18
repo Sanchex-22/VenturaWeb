@@ -12,17 +12,17 @@ const slides = [
   },
   {
     id: 2,
-    title: "Cobertura Nacional",
-    subtitle: "Conectamos puertos con todo Panamá",
-    description: "Red de distribución desde puertos principales hasta el interior del país",
-    image: "/modern-container-port-terminal-with-trucks-and-shi.jpg",
-  },
-  {
-    id: 3,
     title: "Patio de Almacenamiento",
     subtitle: "Espacios seguros para tu carga",
     description: "Patio propio en Las Acacias para almacenamiento temporal y alquiler de espacios",
     image: "/container-storage-yard-with-organized-shipping-con.jpg",
+  },
+    {
+    id: 3,
+    title: "Cobertura Nacional",
+    subtitle: "Conectamos puertos con todo Panamá",
+    description: "Red de distribución desde puertos principales hasta el interior del país",
+    image: "/modern-container-port-terminal-with-trucks-and-shi.jpg",
   },
 ]
 
